@@ -23,3 +23,36 @@ docker compose up
 ```
 
 <br/>
+
+
+Test gateway <br/>
+
+```bash
+curl http://localhost:3000
+```
+
+{ "message": "API Gateway is up and running." } <br/>
+
+
+Test users service <br/>
+
+```bash
+curl http://localhost:3000/users
+```
+
+[ <br/>
+  { "id": 1, "name": "Alice", "email": "alice@example.com" }, <br/>
+  { "id": 2, "name": "Bob", "email": "bob@example.com" } <br/>
+] <br/>
+
+
+Test orders service <br/>
+
+```bash
+curl http://localhost:3000/orders
+```
+
+[ <br/>
+  { "id": 1, "userId": 1, "product": "Laptop" }, <br/>
+  { "id": 2, "userId": 2, "product": "Headphones" } <br/>
+] <br/>
