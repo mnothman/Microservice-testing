@@ -1,0 +1,19 @@
+version: '3.8'
+services:
+  gateway:
+    build: ./gateway
+    ports:
+      - "3000:3000"
+    depends_on:
+      - users-service
+      - orders-service
+
+  users-service:
+    build: ./users-service
+    ports:
+      - "3001:3001"
+
+  orders-service:
+    build: ./orders-service
+    ports:
+      - "3002:3002"
