@@ -1,4 +1,11 @@
+# All app secrets in one
 app-secrets.yaml
+
+# Seperate app secrets
 gateway-secrets.yaml
 users-db-secrets.yaml
 orders-secrets.yaml
+
+
+# Minikube
+minikube-linux-amd64

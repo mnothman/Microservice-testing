@@ -1,4 +1,4 @@
-# all added into one file instead of k8s dir with separate files
+# all added into one file instead of k8s dir with separate files NOT USING THIS -> USING SEPARATE FILES IN k8s directory: gateway-deployment.yaml, users-deployment.yaml, orders-deployment.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:

@@ -6,23 +6,106 @@ Orders-services builds from ./Orders-services and maps port 3002 in container to
 
 depends_on ensures that gateway container only starts after users-services & orders-services are up (does not guarentee it is ready -> need proper health check strategy OR wait-for mechanism) <br/>
 
-<br/>
 
-#1 Build images for gateway, user, and order services <br/>
+Need Minikube for clusters and kubectl
 
+## Prerequisites
+- Install Minikube: [Official Documentation](https://minikube.sigs.k8s.io/docs/start/)
+- Install kubectl: [Official Documentation](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
+
+
+
+Install Minikube:
 
 ```bash
-docker compose build
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+sudo install minikube-linux-amd64 /usr/local/bin/minikube
 ```
 
-#2 Start containers <br/>
-
+Start a cluster:
 
 ```bash
-docker compose up
+minikube start
 ```
 
-<br/>
+Verify the cluster is running:
+
+```bash
+kubectl cluster-info
+```
+
+
+Project workflow
+1. Development
+-Dockerfiles in microservices: gateway, users-services, orders-services
+
+-Ensure using Minikube for Docker daemon:
+
+```bash
+
+eval $(minikube docker-env)
+```
+
+-Build dockerfiles using Minikube's Docker daemon:
+
+```bash
+cd gateway/
+docker build -t gateway:v1 -f Dockerfile.gateway .
+cd ../users-service/
+docker build -t users-service:v1 -f Dockerfile.users-service .
+cd ../orders-service/
+docker build -t orders-service:v1 -f Dockerfile.orders-service .
+```
+
+-Verify images in root dir
+
+```bash
+docker images
+```
+=> Should see: gateway, users-services, orders-services
+
+2. Apply Kubernetes Secrets:
+
+```bash
+cd Secrets
+kubectl apply -f orders-secrets.yaml
+kubectl apply -f users-db-secrets.yaml
+kubectl apply -f gateway-secrets.yaml
+```
+
+Verify the secrets were created:
+
+```bash
+kubectl get secrets
+```
+
+=> Output
+NAME                 TYPE     DATA   AGE
+orders-secrets       Opaque   1      10s
+users-db-secrets     Opaque   1      10s
+gateway-secrets      Opaque   1      10s
+
+
+3. Deployment stage:
+
+-Apply Kubernetes Deployment and Services:
+```bash
+cd k8s/
+kubectl apply -f gateway-deployment.yaml
+kubectl apply -f users-deployment.yaml
+kubectl apply -f orders-deployment.yaml
+```
+
+-Verify Deployments and Services:
+
+```bash
+# ensure pods are running
+kubectl get pods
+
+# check if services are exposed correctly:
+kubectl get services
+
+```
 
 
 Test gateway <br/>
