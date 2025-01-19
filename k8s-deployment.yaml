@@ -18,6 +18,13 @@ spec:
           image: mnothman/gateway:v1
           ports:
             - containerPort: 3000
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
 ---
 apiVersion: v1
 kind: Service
@@ -51,6 +58,13 @@ spec:
           image: mnothman/users-service:v1
           ports:
             - containerPort: 3001
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
 ---
 apiVersion: v1
 kind: Service
@@ -83,6 +97,13 @@ spec:
           image: mnothman/orders-service:v1
           ports:
             - containerPort: 3002
+          resources:
+            requests:
+              memory: "128Mi"
+              cpu: "250m"
+            limits:
+              memory: "256Mi"
+              cpu: "500m"
 ---
 apiVersion: v1
 kind: Service
