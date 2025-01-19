@@ -9,8 +9,13 @@ const USERS_SERVICE_URL = 'http://users-service:3001';
 const ORDERS_SERVICE_URL = 'http://orders-service:3002';
 
 // Health check endpoint for the gateway itself
-app.get('/', (req, res) => {
-  res.send({ message: 'API Gateway is up and running.' });
+app.get('/health', (req, res) => {
+  res.status(200).send({ status: 'Healthy' });
+});
+
+// Readiness check endpoint for the gateway
+app.get('/ready', (req, res) => {
+  res.status(200).send({ status: 'Ready' });
 });
 
 // Route to users service

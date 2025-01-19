@@ -8,8 +8,13 @@ let orders = [
 ];
 
 // Health check endpoint
-app.get('/', (req, res) => {
-  res.send({ message: 'Orders Service is up and running.' });
+app.get('/health', (req, res) => {
+  res.status(200).send({ status: 'Healthy' });
+});
+
+// Readiness check endpoint
+app.get('/ready', (req, res) => {
+  res.status(200).send({ status: 'Ready' });
 });
 
 // GET /orders

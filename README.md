@@ -108,6 +108,21 @@ kubectl get services
 ```
 
 
+
+
+Liveness and Readiness probes in deployment files: gateway-deployment, orders-deployment, users-deployment
+-> Liveness ensures container is alive, Kubernetes restarts container if probe fails, /health endpoint returns 200 OK when running
+-> Readiness ensures container ready to serve traffic, if probe fails then Kubernetes removes Pod from service's endpoints, /ready returns 200 OK when fully initialized
+
+
+
+
+
+
+
+
+
+
 Test gateway <br/>
 
 ```bash
