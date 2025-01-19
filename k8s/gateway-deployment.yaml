@@ -17,3 +17,14 @@ spec:
           image: mnothman/gateway:v1
           ports:
             - containerPort: 3000
+          env:
+            - name: USERS_SERVICE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: gateway-secrets
+                  key: USERS_SERVICE_URL
+            - name: ORDERS_SERVICE_URL
+              valueFrom:
+                secretKeyRef:
+                  name: gateway-secrets
+                  key: ORDERS_SERVICE_URL

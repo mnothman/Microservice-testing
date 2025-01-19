@@ -1,0 +1,4 @@
+app-secrets.yaml
+gateway-secrets.yaml
+users-db-secrets.yaml
+orders-secrets.yaml
