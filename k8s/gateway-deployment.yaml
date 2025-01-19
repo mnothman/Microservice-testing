@@ -28,3 +28,15 @@ spec:
                 secretKeyRef:
                   name: gateway-secrets
                   key: ORDERS_SERVICE_URL
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 3000
+            initialDelaySeconds: 5
+            periodSeconds: 10

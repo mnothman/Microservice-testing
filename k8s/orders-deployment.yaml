@@ -30,3 +30,15 @@ spec:
                 secretKeyRef:
                   name: orders-secrets
                   key: PAYMENT_SERVICE_URL
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 3002
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 3002
+            initialDelaySeconds: 5
+            periodSeconds: 10
