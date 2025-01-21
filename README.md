@@ -107,7 +107,47 @@ kubectl get services
 
 ```
 
+### Horizontal Scaling
+Each deployment needs cpu and memory requests and limits in container specs for HPA to work
 
+1. Ensure k8s metrics server is running
+
+```bash
+kubectl get apiservices | grep metrics
+```
+
+If not installed:
+
+```bash
+kubectl apply -f https://github.com/kubernetes-sigs/metrics-server/releases/latest/download/components.yaml
+```
+
+2. Apply each HPA configuration
+
+```bash
+cd HPA
+kubectl apply -f gateway-hpa.yaml
+```
+
+verify:
+```bash
+kubectl get hpa
+```
+
+3. Monitoring
+```bash
+kubectl get pods
+```
+
+detailed status:
+```bash
+kubectl describe hpa gateway-hpa
+```
+
+resource usage:
+```bash
+kubectl top pods
+```
 
 
 Liveness and Readiness probes in deployment files: gateway-deployment, orders-deployment, users-deployment

@@ -4,9 +4,14 @@ const axios = require('axios');
 const app = express();
 app.use(express.json());
 
-// URLs for the services
-const USERS_SERVICE_URL = 'http://users-service:3001';
-const ORDERS_SERVICE_URL = 'http://orders-service:3002';
+const USERS_SERVICE_URL = process.env.USERS_SERVICE_URL;
+const ORDERS_SERVICE_URL = process.env.ORDERS_SERVICE_URL;
+
+
+
+console.log('USERS_SERVICE_URL:', process.env.USERS_SERVICE_URL);
+console.log('ORDERS_SERVICE_URL:', process.env.ORDERS_SERVICE_URL);
+
 
 // Health check endpoint for the gateway itself
 app.get('/health', (req, res) => {
